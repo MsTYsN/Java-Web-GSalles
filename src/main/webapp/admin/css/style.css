@@ -1,0 +1,20 @@
+.required {
+	color: red;
+}
+
+label {
+	color: black;
+}
+
+.table {
+	color: black;
+}
+
+.table tbody tr:hover {
+	color: black;
+	background-color: #593bdb;
+}
+
+.table tbody a:hover {
+	background-color: transparent;
+}
