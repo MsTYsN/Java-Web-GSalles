@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<% HttpSession s = request.getSession(false);
-   if(session.getAttribute("admin") == null) {
-	   response.sendRedirect("login.jsp");
-   }
+<%
+HttpSession s = request.getSession(false);
+if (session.getAttribute("admin") == null) {
+	response.sendRedirect("login.jsp");
+}
 %>
 <!DOCTYPE html>
 <html>
@@ -26,6 +27,12 @@
 	<%@include file="../template/header.jsp"%>
 	<%@include file="../template/menu.jsp"%>
 	<%@include file="../template/footer.jsp"%>
+
+	<div class="content-body">
+		<div class="container-fluid">
+			
+		</div>
+	</div>
 
 	<script src="../custom/vendor/global/global.min.js"></script>
 	<script src="../custom/js/quixnav-init.js"></script>

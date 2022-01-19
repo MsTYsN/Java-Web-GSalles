@@ -109,6 +109,7 @@ $(document).ready(function() {
 							var exists = false;
 							for (var i = 0; i < data.length; i++) {
 								if (idClient == data[i].id) {
+									exists = true;
 									swal({
 										title: "Voulez-vous réserver cette salle?",
 										icon: "info",
@@ -129,8 +130,6 @@ $(document).ready(function() {
 														} else {
 															swal("Echec!", "Echec lors de la réservation de la salle!", "warning");
 														}
-														exists = true;
-														break;
 													},
 													error: function(jqXHR, textStatus, errorThrown) {
 														console.log(errorThrown);
@@ -138,11 +137,14 @@ $(document).ready(function() {
 												});
 											}
 										});
+									break;
 								}
 							}
-							if(!exists) {
-								swal("Echec!", "Vous avez déjà réservé une salle!", "warning");
+							if (!exists) {
+								swal("Echec!", "Vous avez dèjà réservé une salle!", "warning");
 							}
+						} else {
+							swal("Echec!", "Vous avez dèjà réservé une salle!", "warning");
 						}
 					},
 					error: function(jqXHR, textStatus, errorThrown) {
