@@ -1,8 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
-HttpSession s = request.getSession(false);
-if (session.getAttribute("admin") == null) {
+if (request.getSession(false).getAttribute("admin") == null) {
 	response.sendRedirect("login.jsp");
 }
 %>
@@ -13,7 +12,7 @@ if (session.getAttribute("admin") == null) {
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Focus - Bootstrap Admin Dashboard</title>
+<title>Accueil Admin</title>
 <!-- Favicon icon -->
 <link rel="icon" type="image/png" sizes="16x16"
 	href="../custom/images/favicon.png">
@@ -30,7 +29,32 @@ if (session.getAttribute("admin") == null) {
 
 	<div class="content-body">
 		<div class="container-fluid">
-			
+			<div class="row">
+				<div class="col-12">
+					<div class="row">
+						<div class="col-lg-6 col-sm-6">
+							<div class="card">
+								<div class="card-header">
+									<h4 class="card-title">Les salles les plus réservés</h4>
+								</div>
+								<div class="card-body">
+									<canvas id="barChart_1"></canvas>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-6 col-sm-6">
+							<div class="card">
+								<div class="card-header">
+									<h4 class="card-title">Nombre de réservations par mois</h4>
+								</div>
+								<div class="card-body">
+									<canvas id="barChart_2"></canvas>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 
@@ -38,12 +62,13 @@ if (session.getAttribute("admin") == null) {
 	<script src="../custom/js/quixnav-init.js"></script>
 	<script src="../custom/js/custom.min.js"></script>
 
-	<script src="../custom/vendor/apexcharts/apexcharts.min.js"></script>
+	<script src="../custom/vendor/chart.js/Chart.bundle.min.js"></script>
 
 	<script src="../custom/vendor/moment/moment.min.js"></script>
 	<script src="../custom/vendor/pg-calendar/js/pignose.calendar.min.js"></script>
 
-
 	<script src="../custom/js/dashboard/dashboard-2.js"></script>
+
+	<script src="./script/index.js"></script>
 </body>
 </html>

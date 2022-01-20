@@ -218,5 +218,21 @@ $(document).ready(function() {
 			$("#passwordU").css("border", "1px solid #eaeaea");
 		});
 	}
+
+	$("#disconnect").click(function() {
+		$.ajax({
+			url: "AdminController",
+			data: { op: "disconnect" },
+			type: 'POST',
+			success: function(data, textStatus, jqXHR) {
+				if (data == "1") {
+					location.href = "index.jsp";
+				}
+			},
+			error: function(jqXHR, textStatus, errorThrown) {
+				console.log(errorThrown);
+			}
+		});
+	});
 });
 

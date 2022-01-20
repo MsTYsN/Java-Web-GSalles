@@ -111,7 +111,11 @@ public class ClientController extends HttpServlet {
 				response.setContentType("application/json");
 				Gson json = new Gson();
 				response.getWriter().write(json.toJson(clients));
-			}
+			} else if (request.getParameter("op").equals("disconnect")) {
+            	request.getSession(false).invalidate();
+            	response.setContentType("text/plain");
+            	response.getWriter().write("1");
+            }
 		}
 	}
 

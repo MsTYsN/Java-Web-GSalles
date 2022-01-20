@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -127,6 +128,16 @@ public class OccupationController extends HttpServlet {
 				Gson json = new Gson();
 				List<Occupation> occupations = os.findBySalle(s.getId());
 				response.getWriter().write(json.toJson(occupations));
+			} else if (request.getParameter("op").equals("mostReserved")) {
+				response.setContentType("application/json");
+				Gson json = new Gson();
+				Map<String, Integer> salles = os.findMostReserved();
+				response.getWriter().write(json.toJson(salles));
+			} else if (request.getParameter("op").equals("monthReserved")) {
+				response.setContentType("application/json");
+				Gson json = new Gson();
+				Map<String, Integer> months = os.findMonthReservation();
+				response.getWriter().write(json.toJson(months));
 			}
 		}
 	}

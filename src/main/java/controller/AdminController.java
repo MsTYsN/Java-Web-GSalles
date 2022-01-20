@@ -72,6 +72,10 @@ public class AdminController extends HttpServlet {
                 }else {
                     response.getWriter().write("2");
                 }
+            } else if (request.getParameter("op").equals("disconnect")) {
+            	request.getSession(false).invalidate();
+            	response.setContentType("text/plain");
+            	response.getWriter().write("1");
             }
         }
     }

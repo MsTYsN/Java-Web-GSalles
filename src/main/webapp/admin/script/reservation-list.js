@@ -121,6 +121,7 @@ $(document).ready(function() {
 
 		$(".btn-insert").click(function() {
 			var verif = true;
+			var today = new Date();
 			var date = $("#date").val();
 			var idClient = $("#client-item").val();
 			var idSalle = $("#salle-item").val();
@@ -130,6 +131,10 @@ $(document).ready(function() {
 				verif = false;
 			} else {
 				$("#date").css("border", "1px solid #eaeaea");
+				if(date < today) {
+					swal("Echec!", "Date invalide!", "warning");
+					verif = false;
+				}
 			}
 
 			if (idClient == null) {
@@ -256,5 +261,21 @@ $(document).ready(function() {
 				});
 		});
 	}
+
+	$("#disconnect").click(function() {
+		$.ajax({
+			url: "AdminController",
+			data: { op: "disconnect" },
+			type: 'POST',
+			success: function(data, textStatus, jqXHR) {
+				if (data == "1") {
+					location.href = "index.jsp";
+				}
+			},
+			error: function(jqXHR, textStatus, errorThrown) {
+				console.log(errorThrown);
+			}
+		});
+	});
 });
 

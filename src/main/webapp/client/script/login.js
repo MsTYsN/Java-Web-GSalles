@@ -11,7 +11,7 @@ $(document).ready(function () {
                 if(data == "1") {
                     location.href = "index.jsp";
                 }else {
-                    alert("CIN ou mot de passe invalide");
+                    swal("Echec!", "CIN ou mot de passe invalide!", "warning");
                 }
             },
             error: function (jqXHR, textStatus, errorThrown) {

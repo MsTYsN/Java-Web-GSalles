@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<% HttpSession s = request.getSession(false);
-   if(session.getAttribute("admin") != null) {
+<% 
+   if(request.getSession(false).getAttribute("admin") != null) {
 	   response.sendRedirect("index.jsp");
    }
 %>
@@ -12,7 +12,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Focus - Bootstrap Admin Dashboard </title>
+    <title>Authentification Admin</title>
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="../custom/images/favicon.png">
     <link href="../custom/css/style.css" rel="stylesheet">
@@ -73,6 +73,7 @@
     <script src="../custom/vendor/global/global.min.js"></script>
     <script src="../custom/js/quixnav-init.js"></script>
     <script src="../custom/js/custom.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	<script src="./script/login.js"></script>
 </body>
 

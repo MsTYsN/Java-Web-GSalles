@@ -5,9 +5,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import beans.Occupation;
+import beans.Salle;
 import connexion.Connexion;
 import dao.IDao;
 
@@ -108,6 +111,78 @@ public class OccupationService implements IDao<Occupation> {
 			System.out.println("findAll " + e.getMessage());
 		}
 		return occupations;
+	}
+
+	public Map<String, Integer> findMostReserved() {
+		Map<String, Integer> salles = new HashMap<>();
+		String sql = "select idSalle, count(*) from occupation group by idSalle order by count(*)";
+		try {
+			PreparedStatement ps = Connexion.getInstance().getConnection().prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				Salle s = ss.findById(rs.getInt("idSalle"));
+				salles.put(s.getCode(), rs.getInt("count(*)"));
+			}
+
+		} catch (SQLException e) {
+			System.out.println("findMostReserved " + e.getMessage());
+		}
+		return salles;
+	}
+
+	public Map<String, Integer> findMonthReservation() {
+		Map<String, Integer> months = new HashMap<>();
+		String sql = "select month(date), count(*) from occupation group by month(date) order by month(date)";
+		try {
+			PreparedStatement ps = Connexion.getInstance().getConnection().prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				int month = rs.getInt("month(date)");
+				int count = rs.getInt("count(*)");
+				switch(month) {
+				case 1:
+					months.put("Janvier", count);
+					break;
+				case 2:
+					months.put("Février", count);
+					break;
+				case 3:
+					months.put("Mars", count);
+					break;
+				case 4:
+					months.put("Avril", count);
+					break;
+				case 5:
+					months.put("May", count);
+					break;
+				case 6:
+					months.put("Juin", count);
+					break;
+				case 7:
+					months.put("Juillet", count);
+					break;
+				case 8:
+					months.put("Août", count);
+					break;
+				case 9:
+					months.put("Septembre", count);
+					break;
+				case 10:
+					months.put("Octobre", count);
+					break;
+				case 11:
+					months.put("Novembre", count);
+					break;
+				case 12:
+					months.put("Décembre", count);
+					break;
+				}
+			}
+
+		} catch (SQLException e) {
+			System.out.println("findMostReserved " + e.getMessage());
+		}
+		return months;
 	}
 
 	public List<Occupation> findByClient(int id) {
