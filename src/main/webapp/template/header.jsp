@@ -1,5 +1,5 @@
         <div class="nav-header">
-            <a href="index.html" class="brand-logo">
+            <a href="index.jsp" class="brand-logo">
                 <img class="logo-abbr" src="../custom/images/logo.png" alt="">
                 <img class="logo-compact" src="../custom/images/logo-text.png" alt="">
                 <img class="brand-title" src="../custom/images/logo-text.png" alt="">

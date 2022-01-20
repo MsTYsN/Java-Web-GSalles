@@ -131,7 +131,8 @@ $(document).ready(function() {
 				verif = false;
 			} else {
 				$("#date").css("border", "1px solid #eaeaea");
-				if(date < today) {
+				var compareDate = new Date(Date.parse(date));
+				if (compareDate < today) {
 					swal("Echec!", "Date invalide!", "warning");
 					verif = false;
 				}
