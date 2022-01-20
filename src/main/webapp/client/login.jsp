@@ -38,24 +38,10 @@
                                             <label><strong>Mot de passe</strong></label>
                                             <input type="password" id="password" class="form-control" placeholder="Mot de passe">
                                         </div>
-                                        <div class="form-row d-flex justify-content-between mt-4 mb-2">
-                                            <div class="form-group">
-                                                <div class="form-check ml-2">
-                                                    <input class="form-check-input" type="checkbox" id="basic_checkbox_1">
-                                                    <label class="form-check-label" for="basic_checkbox_1">Se souvenir</label>
-                                                </div>
-                                            </div>
-                                            <!--<div class="form-group">
-                                                <a href="page-forgot-password.html">Forgot Password?</a>
-                                            </div>-->
-                                        </div>
                                         <div class="text-center">
                                             <button type="submit" id="connect" class="btn btn-primary btn-block">Se connecter</button>
                                         </div>
                                     </form>
-                                    <!--<div class="new-account mt-3">
-                                        <p>Don't have an account? <a class="text-primary" href="./page-register.html">C</a></p>
-                                    </div>-->
                                 </div>
                             </div>
                         </div>
