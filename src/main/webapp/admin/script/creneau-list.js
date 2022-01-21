@@ -1,5 +1,17 @@
 $(document).ready(function() {
 	$.ajax({
+		url: "AdminController",
+		data: { op: "display" },
+		type: 'POST',
+		success: function(data, textStatus, jqXHR) {
+			console.log(data);
+			$("#displayName").html("Bienvenue " + data.nom + " " + data.prenom);
+		},
+		error: function(jqXHR, textStatus, errorThrown) {
+			console.log(errorThrown);
+		}
+	});
+	$.ajax({
 		url: "CreneauController",
 		data: { op: "findAll" },
 		type: 'POST',
@@ -88,7 +100,7 @@ $(document).ready(function() {
 				ligne += '<tr><td align="center">' + data[i].id + '</td><td align="center">' + data[i].heureDebut + '</td><td align="center">' + data[i].heureFin + '</td><td align="center"><div class="justify-content-center"><button class="btn btn-outline-dark btn-update" data-creneau=\'' + JSON.stringify(data[i]) + '\' data-toggle="modal" data-target="#update-creneau"><i class="icon icon-edit-72"></i></button><button class="btn btn-outline-danger btn-delete" data-id="' + data[i].id + '"><i class="icon icon-simple-remove"></i></button></div></td></tr>';
 			}
 		} else {
-			ligne = '<td colspan="3" align="center"><p class="fs-2">Pas de clients !<p></td></tr>';
+			ligne = '<td colspan="4" align="center"><p class="fs-2">Pas de créneaux !<p></td></tr>';
 		}
 		$("#creneau-item").html(ligne);
 		$(".btn-update").click(function() {

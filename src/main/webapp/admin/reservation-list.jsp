@@ -41,9 +41,10 @@ if (request.getSession(false).getAttribute("admin") == null) {
 							<div class="input-group mb-3 w-50">
 								<select class="form-control" id="salle-item">
 								</select>
-								<select class="form-control ml-2" id="client-item">
-								</select>
 								<input class="form-control ml-2" type="date" id="date">
+								<button class="btn btn-primary ml-2" type="button" id="show">Afficher</button>
+								<select class="form-control ml-3" id="client-item">
+								</select>
 							</div>
 							<div class="table-responsive pre-scrollable">
 								<table class="table table-hover">

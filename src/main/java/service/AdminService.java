@@ -73,7 +73,7 @@ public class AdminService implements IDao<Admin>{
 
     @Override
     public Admin findById(int id) {
-        String sql = "select * from client where id  = ?";
+        String sql = "select * from admin where id  = ?";
         try {
             PreparedStatement ps = Connexion.getInstance().getConnection().prepareStatement(sql);
             ps.setInt(1, id);

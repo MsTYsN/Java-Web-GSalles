@@ -21,6 +21,7 @@ if (request.getSession(false).getAttribute("admin") == null) {
 <link href="../custom/vendor/chartist/css/chartist.min.css"
 	rel="stylesheet">
 <link href="../custom/css/style.css" rel="stylesheet">
+<link href="./css/style.css" rel="stylesheet">
 </head>
 <body>
 	<%@include file="../template/header.jsp"%>

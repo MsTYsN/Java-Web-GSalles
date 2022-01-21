@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.google.gson.Gson;
+
 import beans.Admin;
 import service.AdminService;
 
@@ -76,6 +78,11 @@ public class AdminController extends HttpServlet {
             	request.getSession(false).invalidate();
             	response.setContentType("text/plain");
             	response.getWriter().write("1");
+            } else if (request.getParameter("op").equals("display")) {
+            	Admin a = as.findById((int) request.getSession(false).getAttribute("admin"));
+            	response.setContentType("application/json");
+				Gson json = new Gson();
+				response.getWriter().write(json.toJson(a));
             }
         }
     }

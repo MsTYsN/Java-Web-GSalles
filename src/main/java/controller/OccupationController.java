@@ -56,7 +56,7 @@ public class OccupationController extends HttpServlet {
 				os.create(new Occupation(date, c, s, cn, etat));
 				response.setContentType("application/json");
 				Gson json = new Gson();
-				List<Occupation> occupations = os.findBySalle(s.getId());
+				List<Occupation> occupations = os.findBySalle(s.getId(), date);
 				response.getWriter().write(json.toJson(occupations));
 			} else if (request.getParameter("op").equals("insertAdmin")) {
 				Date date = new Date(request.getParameter("date").replace("-", "/"));
@@ -67,7 +67,7 @@ public class OccupationController extends HttpServlet {
 				os.create(new Occupation(date, c, s, cn, etat));
 				response.setContentType("application/json");
 				Gson json = new Gson();
-				List<Occupation> occupations = os.findBySalle(s.getId());
+				List<Occupation> occupations = os.findBySalle(s.getId(), date);
 				response.getWriter().write(json.toJson(occupations));
 			} else if (request.getParameter("op").equals("update")) {
 				int id = Integer.parseInt(request.getParameter("id"));
@@ -85,15 +85,16 @@ public class OccupationController extends HttpServlet {
 				os.update(o);
 				response.setContentType("application/json");
 				Gson json = new Gson();
-				List<Occupation> occupations = os.findBySalle(s.getId());
+				List<Occupation> occupations = os.findBySalle(s.getId(), date);
 				response.getWriter().write(json.toJson(occupations));
 			} else if (request.getParameter("op").equals("delete")) {
 				int id = Integer.parseInt(request.getParameter("id"));
 				Salle s = ss.findById(Integer.parseInt(request.getParameter("idSalle")));
+				Date date = new Date(request.getParameter("date").replace("-", "/"));
 				os.delete(os.findById(id));
 				response.setContentType("application/json");
 				Gson json = new Gson();
-				List<Occupation> occupations = os.findBySalle(s.getId());
+				List<Occupation> occupations = os.findBySalle(s.getId(), date);
 				response.getWriter().write(json.toJson(occupations));
 			} else if (request.getParameter("op").equals("findAll")) {
 				List<Occupation> occupations = os.findAll();
@@ -102,7 +103,8 @@ public class OccupationController extends HttpServlet {
 				response.getWriter().write(json.toJson(occupations));
 			} else if (request.getParameter("op").equals("findBySalle")) {
 				int idSalle = Integer.parseInt(request.getParameter("idSalle"));
-				List<Occupation> occupations = os.findBySalle(idSalle);
+				Date date = new Date(request.getParameter("date").replace("-", "/"));
+				List<Occupation> occupations = os.findBySalle(idSalle, date);
 				response.setContentType("application/json");
 				Gson json = new Gson();
 				response.getWriter().write(json.toJson(occupations));
@@ -121,12 +123,13 @@ public class OccupationController extends HttpServlet {
 			} else if (request.getParameter("op").equals("validate")) {
 				int id = Integer.parseInt(request.getParameter("id"));
 				Salle s = ss.findById(Integer.parseInt(request.getParameter("idSalle")));
+				Date date = new Date(request.getParameter("date").replace("-", "/"));
 				Occupation o = os.findById(id);
 				o.setEtat("Réservé");
 				os.update(o);
 				response.setContentType("application/json");
 				Gson json = new Gson();
-				List<Occupation> occupations = os.findBySalle(s.getId());
+				List<Occupation> occupations = os.findBySalle(s.getId(), date);
 				response.getWriter().write(json.toJson(occupations));
 			} else if (request.getParameter("op").equals("mostReserved")) {
 				response.setContentType("application/json");

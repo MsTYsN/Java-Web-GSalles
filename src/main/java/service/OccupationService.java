@@ -203,12 +203,13 @@ public class OccupationService implements IDao<Occupation> {
 		return occupations;
 	}
 
-	public List<Occupation> findBySalle(int id) {
+	public List<Occupation> findBySalle(int id, java.util.Date date) {
 		List<Occupation> occupations = new ArrayList<Occupation>();
-		String sql = "select * from occupation where idSalle = ?";
+		String sql = "select * from occupation where idSalle = ? and date = ?";
 		try {
 			PreparedStatement ps = Connexion.getInstance().getConnection().prepareStatement(sql);
 			ps.setInt(1, id);
+			ps.setDate(2, new Date(date.getTime()));
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 				occupations.add(new Occupation(rs.getInt("id"), rs.getDate("date"), cs.findById(rs.getInt("idClient")),

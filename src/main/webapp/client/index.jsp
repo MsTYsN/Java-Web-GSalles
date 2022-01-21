@@ -1,3 +1,4 @@
+<%@page import="beans.Client"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
@@ -42,6 +43,7 @@ if (request.getSession(false).getAttribute("client") == null) {
 								<select class="form-control" id="salle-item">
 								</select>
 								<input class="form-control ml-2" type="date" id="date"> 
+								<button class="btn btn-primary ml-2" type="button" id="show">Afficher</button>
 								<input hidden type="text" class="form-control input-default"
 									id="clientId" value="<%= request.getSession(false).getAttribute("client") %>">
 							</div>

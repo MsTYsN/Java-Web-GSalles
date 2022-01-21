@@ -11,7 +11,7 @@
                 <nav class="navbar navbar-expand">
                     <div class="collapse navbar-collapse justify-content-between">
                         <div class="header-left">
-
+							<label id="displayName"></label>
                         </div>
 
                         <ul class="navbar-nav header-right">

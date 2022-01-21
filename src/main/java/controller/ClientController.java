@@ -115,6 +115,11 @@ public class ClientController extends HttpServlet {
             	request.getSession(false).invalidate();
             	response.setContentType("text/plain");
             	response.getWriter().write("1");
+            } else if (request.getParameter("op").equals("display")) {
+            	Client c = cs.findById((int) request.getSession(false).getAttribute("client"));
+            	response.setContentType("application/json");
+				Gson json = new Gson();
+				response.getWriter().write(json.toJson(c));
             }
 		}
 	}

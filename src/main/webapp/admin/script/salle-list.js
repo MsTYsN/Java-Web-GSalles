@@ -1,5 +1,17 @@
 $(document).ready(function() {
 	$.ajax({
+		url: "AdminController",
+		data: { op: "display" },
+		type: 'POST',
+		success: function(data, textStatus, jqXHR) {
+			console.log(data);
+			$("#displayName").html("Bienvenue " + data.nom + " " + data.prenom);
+		},
+		error: function(jqXHR, textStatus, errorThrown) {
+			console.log(errorThrown);
+		}
+	});
+	$.ajax({
 		url: "SalleController",
 		data: { op: "findAll" },
 		type: 'POST',

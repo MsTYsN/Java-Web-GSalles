@@ -1,5 +1,16 @@
 $(document).ready(function() {
 	$.ajax({
+		url: "ClientController",
+		data: { op: "display" },
+		type: 'POST',
+		success: function(data, textStatus, jqXHR) {
+			$("#displayName").html("Bienvenue " + data.nom + " " + data.prenom);
+		},
+		error: function(jqXHR, textStatus, errorThrown) {
+			console.log(errorThrown);
+		}
+	});
+	$.ajax({
 		url: "SalleController",
 		data: { op: "findAll" },
 		type: 'POST',
@@ -22,19 +33,45 @@ $(document).ready(function() {
 		}
 	});
 
-	$("#salle-item").change(function() {
-		var idSalle = this.value;
-		$.ajax({
-			url: "OccupationController",
-			data: { op: "findBySalle", idSalle: idSalle },
-			type: 'POST',
-			success: function(data, textStatus, jqXHR) {
-				remplirOccupation(data);
-			},
-			error: function(jqXHR, textStatus, errorThrown) {
-				console.log(errorThrown);
+	$("#show").click(function() {
+		var verif = true;
+		var today = new Date();
+		var idSalle = $("#salle-item").val();
+		var date = $("#date").val();
+
+		if (idSalle == null) {
+			$("#salle-item").css("border", "1px solid red");
+			verif = false;
+		} else {
+			$("#salle-item").css("border", "1px solid #eaeaea");
+		}
+
+
+		if (date == "") {
+			$("#date").css("border", "1px solid red");
+			verif = false;
+		} else {
+			$("#date").css("border", "1px solid #eaeaea");
+			var compareDate = new Date(Date.parse(date));
+			if (compareDate < today) {
+				swal("Echec!", "Date invalide!", "warning");
+				verif = false;
 			}
-		});
+		}
+
+		if (verif) {
+			$.ajax({
+				url: "OccupationController",
+				data: { op: "findBySalle", idSalle: idSalle, date: date },
+				type: 'POST',
+				success: function(data, textStatus, jqXHR) {
+					remplirOccupation(data);
+				},
+				error: function(jqXHR, textStatus, errorThrown) {
+					console.log(errorThrown);
+				}
+			});
+		}
 	});
 
 	function remplirCreneau(data) {
@@ -93,6 +130,14 @@ $(document).ready(function() {
 			var idClient = $("#clientId").val();
 			var idSalle = $("#salle-item").val();
 			var idCreneau = $(this).parents().eq(2).data("creneau");
+
+			if (idSalle == null) {
+				$("#salle-item").css("border", "1px solid red");
+				verif = false;
+			} else {
+				$("#salle-item").css("border", "1px solid #eaeaea");
+			}
+
 			if (date == "") {
 				$("#date").css("border", "1px solid red");
 				verif = false;
@@ -162,6 +207,7 @@ $(document).ready(function() {
 
 		$(".btn-delete").click(function() {
 			var id = $(this).data("id");
+			var date = $("#date").val();
 			var idSalle = $("#salle-item").val();
 			swal({
 				title: "Voulez-vous supprimer la réservation de cette salle?",
@@ -173,7 +219,7 @@ $(document).ready(function() {
 					if (isConfirm) {
 						$.ajax({
 							url: "OccupationController",
-							data: { op: "delete", id: id, idSalle: idSalle },
+							data: { op: "delete", id: id, idSalle: idSalle, date: date },
 							type: 'POST',
 							success: function(data, textStatus, jqXHR) {
 								if (data != null) {
